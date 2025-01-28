@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+/* Dark Theme Background */
+body {
+    font-family: "Comfortaa", sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(150deg, rgb(24, 24, 27) 0%, rgb(100, 9, 77) 35%, rgb(195, 35, 184) 100%);
+    color: #fff;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px; /* Space for the footer */
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+p {
+    color: white;
+}
+
+a {
+    color: #C323B8;
+    text-decoration: none;
+}
+
+.card {
+    background-color: #18181b; /* Dark card background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s;
+    cursor: pointer;
+    loading: lazy; /* Lazy Loading */
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed; 
+    z-index: 1000; 
+    padding-top: 60px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background-color: rgba(0, 0, 0, 0.9); 
+}
+
+.modal-header {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: calc(100% - 40px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 80%;
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden; /* Hide excess parts when zoomed */
+    cursor: zoom-in; /* Initial cursor */
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 80vh;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    object-fit: contain; /* Maintain aspect ratio */
+    transform: scale(1); /* Initial scale */
+    transform-origin: center center; /* Initial origin */
+    cursor: inherit; /* Inherit cursor from .image-container */
+}
+
+.modal-image.loaded {
+    opacity: 1;
+}
+
+.modal-image.zoomed {
+    cursor: grab; /* Change cursor when zoomed */
+    transition: transform 0.3s ease, opacity 0.3s ease, cursor 0.3s ease;
+}
+
+.modal-image.zoomed.grabbing {
+    cursor: grabbing; /* Change cursor when actively dragging */
+}
+
+.close {
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 30px;
+    border: none;
+    background: none;
+    user-select: none;
+    transition: color 0.3s;
+}
+
+.prev:hover, .next:hover {
+    color: #bbb;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.modal-controls button {
+    background-color: #f00dd7;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.modal-controls button:hover {
+    background-color: #fff;
+    color: #C323B8;
+}
+
+.modal-caption {
+    text-align: center;
+    color: #ccc;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* Additional Dark Theme Enhancements */
+button {
+    font-size: 16px;
+    outline: none;
+    border-radius: 4px;
+}
+
+#downloadBtn {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Style for the Download Icon */
+.download-icon {
+    width: 24px; /* Adjust size as needed */
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.download-icon:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+    }
+
+    .prev, .next {
+        font-size: 24px;
+        padding: 12px;
+    }
+
+    .modal-controls button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .modal-caption {
+        font-size: 16px;
+    }
+}
+
+/* Grabbing Cursor during active drag */
+.modal-image.grabbing {
+    cursor: grabbing;
+}
+
+/* Footer Styles */
+.footer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    bottom: 0;
+    width: 100%;
+    background-color: #64094d;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.footer-main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visit-counter {
+    text-align: center;
+    padding-inline: 10px;
+    padding-block: 5px;
+    border-radius: 60px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.github {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.github-label {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.github-logo {
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    transition: transform 0.2s;
+}
+
+.github-logo:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
