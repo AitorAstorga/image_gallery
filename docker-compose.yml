@@ -1,0 +1,9 @@
+services:
+  web:
+    container_name: image-gallery
+    image: ghcr.io/aitorastorga/aichan-image-gallery:latest
+    ports:
+      - "YOUR_PORT:80"
+    volumes:
+      - /PATH_TO_YOUR_IMAGES:/static/images
+    restart: unless-stopped
