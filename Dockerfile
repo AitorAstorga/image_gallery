@@ -34,7 +34,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY index.html ./
 COPY styles.css ./
 COPY src ./src
-COPY static ./static
+COPY static/resources ./static/resources
 
 # Build the application with Trunk (the generated files will be included in the build).
 RUN trunk build --release --dist=dist
@@ -57,7 +57,10 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY generate_images_json.sh /usr/share/nginx/html/static/generate_images_json.sh
 RUN chmod +x /usr/share/nginx/html/static/generate_images_json.sh
 
+# Set the working directory.
+WORKDIR /usr/share/nginx/html/static
+
 EXPOSE 80
 
 # Start the image list generator in the background and launch Nginx.
-CMD sh -c "/usr/share/nginx/html/static/generate_images_json.sh & nginx -g 'daemon off;'"
+CMD sh -c "./generate_images_json.sh & nginx -g 'daemon off;'"
