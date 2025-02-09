@@ -19,7 +19,7 @@ generate_json() {
             else
                 echo "," >> "$OUTPUT_FILE"
             fi
-            echo "  \"$filename\"" >> "$OUTPUT_FILE"
+            echo "{ \"filename\":   \"$filename\" }" >> "$OUTPUT_FILE"
         fi
     done
     echo "]" >> "$OUTPUT_FILE"
