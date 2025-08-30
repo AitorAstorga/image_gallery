@@ -40,7 +40,7 @@ body {
     min-height: 100vh;
     position: relative;
     padding: 20px;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
 }
 
 /* Header styling */
@@ -80,6 +80,7 @@ body {
 .gallery-container {
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 40px;
 }
 
 .card {
@@ -289,11 +290,13 @@ body {
     align-items: center;
     justify-content: space-between;
     bottom: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     background-color: var(--bg-card);
     border-top: 2px solid var(--accent);
     padding: 0px 20px;
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
 
 .footer-main {
@@ -305,45 +308,51 @@ body {
 
 .visit-counter {
     text-align: center;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 20px;
     background: var(--bg-dark);
     color: var(--text-main);
     font-weight: 600;
+    font-size: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.github {
+.git {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    padding: 4px 8px;
     text-decoration: none;
     color: var(--text-main);
 }
 
-.github:hover {
-    background-color: var(--surface-hov);
-    transform: translateY(-2px);
+.git:hover {
+    background: var(--accent);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.6s ease;
 }
 
-.github-label {
-    font-size: 16px;
+.git:hover .git-logo {
+    background: var(--accent);
+    mask: url('/static/resources/git-logo.svg') no-repeat center;
+    mask-size: contain;
+    -webkit-mask: url('/static/resources/git-logo.svg') no-repeat center;
+    -webkit-mask-size: contain;
+    filter: none;
+}
+
+.git-label {
+    font-size: 14px;
     font-weight: 500;
 }
 
-.github-logo {
-    width: 24px;
-    height: 24px;
+.git-logo {
+    width: 20px;
+    height: 20px;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    transition: all 0.3s ease;
-}
-
-.github:hover .github-logo {
-    filter: invert(14%) sepia(93%) saturate(7496%) hue-rotate(316deg) brightness(97%) contrast(93%);
-    transform: scale(1.1);
+    transition: all 0.6s ease;
 }
 
 /* Links */
@@ -400,17 +409,35 @@ a:hover {
     }
     
     .footer {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         gap: 10px;
-        padding: 12px;
+        padding: 8px 20px;
     }
     
     .footer-main {
-        order: 2;
+        order: 1;
+        flex: none;
     }
     
-    .github {
-        order: 1;
+    .git {
+        order: 2;
+        flex: none;
+    }
+    
+    .visit-counter {
+        padding: 3px 6px;
+        font-size: 12px;
+    }
+    
+    .git-label {
+        font-size: 12px;
+    }
+    
+    .git-logo {
+        width: 16px;
+        height: 16px;
     }
 }
 

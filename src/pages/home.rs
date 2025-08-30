@@ -240,13 +240,13 @@ pub fn home() -> Html {
                     <a
                         href="https://git.prisma.moe/aichan/image_gallery"
                         aria-label="Source Code"
-                        class="github"
+                        class="git"
                     >
-                        <p class="github-label">{ "Source Code" }</p>
+                        <p class="git-label">{ "Source Code" }</p>
                         <img
-                            src="/static/resources/github-logo.svg"
-                            alt="GitHub Logo"
-                            class="github-logo"
+                            src="/static/resources/git-logo.svg"
+                            alt="Git Logo"
+                            class="git-logo"
                         />
                     </a>
                 </footer>
