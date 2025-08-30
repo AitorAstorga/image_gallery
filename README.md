@@ -65,7 +65,7 @@ Perfect for photographers, artists, or anyone wanting to showcase their image co
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
-![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white) ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=for-the-badge&logo=webassembly&logoColor=white) [![Yew](https://img.shields.io/badge/Yew-2E8B57?style=for-the-badge&logo=rust&logoColor=white)](#) [![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=fff)](#) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
+![Rust](static/badges/rust-badge.svg) ![WebAssembly](static/badges/webassembly-badge.svg) [![Yew](static/badges/yew-badge.svg)](#) [![Bash](static/badges/bash-badge.svg)](#) ![Docker](static/badges/docker-badge.svg)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
