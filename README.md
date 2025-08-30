@@ -1,30 +1,23 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
- <a href="https://github.com/AitorAstorga/image_gallery">
+ <a href="https://git.prisma.moe/aichan/image_gallery">
  </a>
 
  <h1 align="center">Image Gallery</h1>
  <p align="center"> <img 
-    src="https://visitcounter.aichan.ovh/counter/YOUR_PAGE_NAME/svg?label=Example%20Visits" height=20
+    src="https://visitcounter.aichan.ovh/counter/image_gallery/svg?label=Project%20Visits" height=20
     alt="Visit Counter" /> </p>
 
  <p align="center">
- Simple HTML / CSS / Webasm (<a href="https://yew.rs/">Rust Yew</a>) image gallery made for <a href="https://michi.blue/">my cat</a> and deployed with Docker.
+ A responsive image gallery built with Rust Yew and WebAssembly. Features dynamic image loading, smooth animations, and Docker deployment for showcasing photo collections.
  <br />
  <br />
  <a href="https://yew.rs/docs/getting-started/introduction">Yew Documentation</a>
  ·
- <a href="https://github.com/AitorAstorga/image_gallery/issues">Report Bug</a>
+ <a href="https://git.prisma.moe/aichan/image_gallery/issues">Report Bug</a>
  ·
- <a href="https://github.com/AitorAstorga/image_gallery/issues">Request Feature</a>
+ <a href="https://git.prisma.moe/aichan/image_gallery/issues">Request Feature</a>
  </p>
 </div>
 
@@ -38,24 +31,24 @@
    </ul>
  </li>
  <li>
- <a href="#project-structure">Project Structure</a>
+ <a href="#architecture">Architecture</a>
  <ul>
- <li><a href="#modules">Modules</a></li>
+ <li><a href="#gallery-frontend">Gallery Frontend</a></li>
+ <li><a href="#image-discovery">Image Discovery</a></li>
  </ul>
  </li>
- <li><a href="#getting-started">Getting Started</a></li>
-    <ul>
+ <li><a href="#features">Features</a></li>
+ <li><a href="#deployment">Deployment</a></li>
+   <ul>
+      <li><a href="#using-docker">Using Docker</a></li>
+   </ul>
+   <ul>
+      <li><a href="#using-docker-compose">Using Docker Compose</a></li>
+   </ul>
+ <li><a href="#development">Development</a></li>
+   <ul>
       <li><a href="#prerequisites">Prerequisites</a></li>
-   </ul>
-   <ul>
-      <li><a href="#installation-and-custom-ui">Installation and Custom UI</a></li>
-   </ul>
- <li><a href="#deploying-your-custom-app">Deploying Your Custom App</a></li>
-   <ul>
-      <li><a href="#option-a-push-to-ghcrio-using-github-actions">Option A: Push to ghcr.io Using GitHub Actions</a></li>
-   </ul>
-   <ul>
-      <li><a href="#option-B-use-the-dockerfile-directly">Option B: Use the Dockerfile Directly</a></li>
+      <li><a href="#local-development">Local Development</a></li>
    </ul>
  <li><a href="#contributing">Contributing</a></li>
  <li><a href="#license">License</a></li>
@@ -65,164 +58,154 @@
 
 ## About The Project
 
-This project is an image gallery application that dynamically generates a JSON list of images from a specified directory. It uses Nginx to serve the content and monitors the images directory for any changes, updating the JSON file accordingly. The application is containerised using Docker and integrated with GitHub Actions for continuous integration and deployment.
+Image Gallery is a modern, responsive web application for displaying photo collections. Built with Rust and WebAssembly, it provides fast loading times and smooth user interactions. The application automatically discovers images in a directory and generates a dynamic gallery interface with lazy loading and responsive design.
+
+Perfect for photographers, artists, or anyone wanting to showcase their image collections with a clean, professional interface.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
-![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white) [![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=fff)](#) ˙ [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)](#) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white) ˙ [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=vsc&logoColor=white)](#)
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white) ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=for-the-badge&logo=webassembly&logoColor=white) [![Yew](https://img.shields.io/badge/Yew-2E8B57?style=for-the-badge&logo=rust&logoColor=white)](#) [![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=fff)](#) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Project Structure
+## Architecture
 
-The project is organised as follows:
+The Image Gallery uses a simple but effective architecture that separates image discovery from the frontend display.
 
+### Gallery Frontend
+**Technology:** Rust Yew (compiled to WebAssembly)
+
+- Responsive grid layout that adapts to different screen sizes
+- Lazy loading for optimal performance with large image collections
+- Smooth animations and transitions
+- JSON-based image metadata loading
+- Modern CSS Grid and Flexbox styling
+
+### Image Discovery
+**Technology:** Bash script automation
+
+- Automatic scanning of image directories
+- JSON metadata generation with image paths and metadata
+- File system monitoring for dynamic updates
+- Support for common image formats (JPG, PNG, GIF, WebP)
+
+<p align="right">(<a href="#architecture">back to top</a>)</p>
+
+## Features
+
+- 📸 **Dynamic Image Loading** - Automatically discovers and displays images from directories
+- 🎨 **Responsive Design** - Adapts seamlessly to desktop, tablet, and mobile devices
+- ⚡ **WebAssembly Performance** - Fast, native-speed execution in the browser
+- 🖼️ **Lazy Loading** - Images load as needed for optimal performance
+- 📱 **Touch-Friendly** - Optimized for mobile interactions and gestures
+- 🔄 **Auto-Discovery** - Automatically updates when new images are added
+- 🐳 **Container Ready** - Easy deployment with Docker and Docker Compose
+
+<p align="right">(<a href="#features">back to top</a>)</p>
+
+## Deployment
+
+You have multiple options to deploy the Image Gallery:
+
+### Using Docker
+
+Run the pre-built container:
+```bash
+docker run --rm -it \
+  -p 80:80/tcp \
+  -e GALLERY_TITLE="Image Gallery" \
+  -e GALLERY_HEADING="Welcome!" \
+  -e GALLERY_DESCRIPTION="This is the gallery description that you can customize with GALLERY_DESCRIPTION env variable and even supports <a href=\"https://git.prisma.moe/aichan/image_gallery\">links like this</a>." \
+  -e VISIT_COUNTER_URL="https://visitcounter.aichan.ovh/counter/gallery_example/svg?label=Visits&background_label=00000000&background_counter=00000000&shadow_opacity=0&grad_stop1_color=00000000&grad_stop1_opacity=0&grad_stop1_opacity=0&grad_stop2_opacity=0" \
+  -v /path/to/your/images:/usr/share/nginx/html/static/images \
+  git.prisma.moe/aichan/image_gallery:latest
 ```
-image_gallery/
-├── Cargo.toml
-├── generate_images_json.sh # Script to serve as a local "API" discovering the images
-├── static/
-│ ├── images/
-│ ├── resources/
-│ └── images.json # Needed for the page to know what images to load
-└── src/
-  ├── main.rs
-  ├── models.rs # Data structures
-  ├── router.rs # Define the URL routes
-  ├── components/
-  │ ├── gallery.rs
-  │ └── mod.rs
-  ├── pages/
-  │ ├── home.rs
-  │ └── mod.rs
+
+Replace 'gallery_example' with your domain or unique identifier
+
+### Using Docker Compose
+
+Create a `docker-compose.yml` file:
+```yaml
+services:
+  image_gallery:
+    container_name: image_gallery
+    image: git.prisma.moe/aichan/image_gallery:latest
+    ports:
+      - <YOUR_PORT>:80
+    environment:
+      - GALLERY_TITLE=Image Gallery
+      - GALLERY_HEADING=Welcome!
+      - GALLERY_DESCRIPTION=This is the gallery description that you can customize with GALLERY_DESCRIPTION env variable and even supports <a href="https://git.prisma.moe/aichan/image_gallery">links like this</a>.
+      - FOOTER_LINK_TEXT=Repository
+      - FOOTER_LINK_URL=https://git.prisma.moe/aichan/image_gallery
+      - VISIT_COUNTER_URL=https://visitcounter.aichan.ovh/counter/gallery/svg?label=Visits&background_label=00000000&background_counter=00000000&shadow_opacity=0&grad_stop1_color=00000000&grad_stop1_opacity=0&grad_stop1_opacity=0&grad_stop2_opacity=0  # Replace 'gallery_example' with your domain or unique identifier
+    volumes:
+      - <PATH_TO_YOUR_IMAGES>:/usr/share/nginx/html/static/images
+    restart: unless-stopped
 ```
 
-### Modules
+Then run:
+```bash
+docker-compose up -d
+```
 
-- `main.rs`: Entrypoint of the application.
-- `models.rs`: Contains data structures for counters and SVG options.
-- `router.rs`: Controls the directing of the URL (just / our case)
-- `components/gallery.rs`: Fetches the images and generates the grid with them.
-- `pages/home.rs`: Contains the main logic and HTML code.
+**Access Point:**
+- Gallery will be served at `http://localhost:<YOUR_PORT>/`
 
-<p align="right">(<a href="#project-structure">back to top</a>)</p>
+<p align="right">(<a href="#deployment">back to top</a>)</p>
 
-## Getting Started
-
-Follow these instructions to set up a local instance of the Image Gallery.
-
-> [!NOTE]
-> You have to build this locally or fork this repository to be able to modify the HTML to your liking.
+## Development
 
 ### Prerequisites
 
 - Rust installed (includes Cargo)
-- WebAssembly target
-   ```bash
-   rustup target add wasm32-unknown-unknown
-   ```
-- Trunk
-   ```bash
-   cargo install --locked trunk
-   ```
-- (Optional) Docker if you plan to deploy in a container
+- WebAssembly target:
+  ```bash
+  rustup target add wasm32-unknown-unknown
+  ```
+- Trunk for building and serving:
+  ```bash
+  cargo install --locked trunk
+  ```
+- (Optional) Docker for containerized deployment
 
-### Installation and Custom UI
+### Local Development
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/AitorAstorga/image_gallery.git
+   git clone https://git.prisma.moe/aichan/image_gallery.git
    cd image_gallery
    ```
 
-2. Modify the HTML
-   - Edit the File:
-     Open `/src/pages/home.rs`. It contains the HTML (and Yew component code) for the home page.
+2. Add your images to the `static/images/` directory
 
-   - Make Your Changes:
-     Update the HTML, styles, or layout as desired. Remember that because this is a Rust Yew app, any UI changes will require a rebuild for them to take effect.
+3. Generate the images JSON:
+   ```bash
+   ./generate_images_json.sh
+   ```
 
-3. Run the application locally:
+4. Run the development server:
    ```bash
    trunk serve --address 0.0.0.0
    ```
 
-By default, Yew runs on `localhost:8080`.
+5. Open your browser to `http://localhost:8080`
 
-<p align="right">(<a href="#testing-the-api">back to top</a>)</p>
+**Development Notes:**
+- The `generate_images_json.sh` script scans the `static/images/` directory and creates `static/images.json`
+- Any changes to the Rust code require a rebuild
+- CSS changes in `styles.css` are applied immediately
+- Add new images to `static/images/` and regenerate the JSON for them to appear
 
-## Deploying Your Custom App
-
-You have two options to deploy your changes:
-
-### Option A: Push to ghcr.io Using GitHub Actions
-
-You can use GitHub Actions to automatically build the project and push a Docker image to GitHub Container Registry (ghcr.io).
-
-1. Ensure the Workflow Exists:
-   Check that your fork contains the GitHub Actions workflow (found in .github/workflows/). It should be configured to build your project and push the image.
-
-2. Configure Repository Secrets:
-   In your forked repository, set up the following secrets (via **Settings > Secrets and variables > Actions**):
-   - `GHCR_TOKEN`: Your GitHub Container Registry Personal Access Token.
-   - (Any other secrets required by your workflow.)
-
-3. Commit and Push Your Changes:
-   ```bash
-   git add .
-   git commit -m "Customize home page HTML"
-   git push origin main
-   ```
-
-   The GitHub Actions workflow will trigger automatically, build your project, and push the Docker image to:
-   ```bash
-   ghcr.io/<your-username>/aichan-image-gallery:latest
-   ```
-
-4. Update docker-compose (if needed):
-   If you use Docker Compose, update the image reference in your `docker-compose.yml` to point to your custom image.
-
-   A sample. Keep in mind this will use my image, you should make your own.
-   ```yaml
-   services:
-   web:
-      container_name: image-gallery
-      image: ghcr.io/aitorastorga/aichan-image-gallery:latest
-      ports:
-         - "YOUR_PORT:80"
-      volumes:
-         - /PATH_TO_YOUR_IMAGES:/usr/share/nginx/html/static/images
-      restart: unless-stopped
-   ```
-
-### Option B: Use the Dockerfile Directly
-
-If you prefer local container builds, use the provided `Dockerfile`:
-
-1. Build the Docker Image:
-   ```bash
-   docker build -t your-image-name .
-   ```
-
-2. Run the Container:
-   ```bash
-   docker run -d -p YOUR_PORT:80 your-image-name
-   ```
-
-3. Update docker-compose.yml (Optional):
-   If you deploy with Docker Compose, modify the image field in docker-compose.yml to use your newly built image.
-
-> [!NOTE]
-> Reminder: Every time you modify the UI or other front-end code (such as /src/pages/home.rs), be sure to rebuild your project (or Docker image) so that your changes are included in your deployment.
-
-<p align="right">(<a href="#getting-started">back to top</a>)</p>
+<p align="right">(<a href="#development">back to top</a>)</p>
 
 ## Contributing
 
 Contributions are welcome! Please fork the repository, make your changes, and open a pull request.
 
-1. Fork the Project
+1. Fork the Project on [Forgejo](https://git.prisma.moe/aichan/image_gallery)
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
@@ -240,28 +223,15 @@ Distributed under the European Union Public License v1.2. See `LICENSE` for more
 
 Aitor Astorga Saez de Vicuña - a.astorga.sdv@protonmail.com
 
-Project Link: [https://github.com/AitorAstorga/image_gallery](https://github.com/AitorAstorga/image_gallery)
+Project Link: [https://git.prisma.moe/aichan/image_gallery](https://git.prisma.moe/aichan/image_gallery)
 
 <p align="right">(<a href="#contact">back to top</a>)</p>
 
 ## Acknowledgments
 
-Thanks to these nice projects!
+Thanks to these amazing projects and technologies!
 
-- [Rust Yew](https://yew.rs/) A framework for creating reliable and efficient web applications.
+- [Rust Yew](https://yew.rs/) - A modern Rust framework for creating multi-threaded front-end web apps with WebAssembly
+- [WebAssembly](https://webassembly.org/) - A binary instruction format for a stack-based virtual machine
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/AitorAstorga/image_gallery.svg?style=for-the-badge
-[contributors-url]: https://github.com/AitorAstorga/image_gallery/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/AitorAstorga/image_gallery.svg?style=for-the-badge
-[forks-url]: https://github.com/AitorAstorga/image_gallery/network/members
-[stars-shield]: https://img.shields.io/github/stars/AitorAstorga/image_gallery.svg?style=for-the-badge
-[stars-url]: https://github.com/AitorAstorga/image_gallery/stargazers
-[issues-shield]: https://img.shields.io/github/issues/AitorAstorga/image_gallery.svg?style=for-the-badge
-[issues-url]: https://github.com/AitorAstorga/image_gallery/issues
-[license-shield]: https://img.shields.io/github/license/AitorAstorga/image_gallery.svg?style=for-the-badge
-[license-url]: https://github.com/AitorAstorga/image_gallery/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/aitor-astorga-saez-de-vicuña

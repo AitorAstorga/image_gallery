@@ -1,96 +1,158 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+:root {
+    --pink: #D60270;
+    --purple: #9B4F96;
+    --blue: #0038A8;
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f0f0f0;
+    --accent: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+    --surface-hov: #262626;
+}
 
-/* Dark Theme Background */
+@font-face {
+    font-family: 'ngnl';
+    src: url('static/font/ngnl_font.ttf');
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+*::selection,
+*::-moz-selection {
+    background-color: black;
+    color: var(--text-main);
+}
+
+html,
 body {
-    font-family: "Comfortaa", sans-serif;
+    height: 100%;
+}
+
+body {
     margin: 0;
+    font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
     padding: 20px;
+    padding-bottom: 80px;
+}
+
+/* Header styling */
+.color-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(150deg, rgb(24, 24, 27) 0%, rgb(100, 9, 77) 35%, rgb(195, 35, 184) 100%);
-    color: #fff;
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 60px; /* Space for the footer */
+    margin-bottom: 2rem;
 }
 
-h1 {
+.color-header header {
     text-align: center;
-    color: #fff;
+    padding: 40px 20px 20px;
+    background: var(--accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
-p {
-    color: white;
+.color-header h1 {
+    font-family: 'ngnl', sans-serif;
+    font-size: 3rem;
+    margin: 0;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
-a {
-    color: #C323B8;
-    text-decoration: none;
+.intro {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    color: #ccc;
+}
+
+/* Gallery container */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .card {
-    background-color: #18181b; /* Dark card background */
-    padding: 20px;
+    background-color: var(--bg-card);
+    border: 2px solid var(--pink);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 1200px;
+    padding: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--purple);
+}
+
+/* Gallery grid */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
     width: 100%;
-    max-width: 1200px;
 }
 
 .gallery img {
     width: 100%;
-    height: auto;
+    height: 220px;
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    loading: lazy; /* Lazy Loading */
+    border: 2px solid transparent;
 }
 
 .gallery img:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(214, 2, 112, 0.3);
+    border-color: var(--pink);
 }
 
-/* Modal Styles */
+/* Modal styles */
 .modal {
-    position: fixed; 
-    z-index: 1000; 
-    padding-top: 60px; 
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: hidden; 
-    background-color: rgba(0, 0, 0, 0.9); 
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
 }
 
 .modal-header {
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 20px;
     width: calc(100% - 40px);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .modal-content {
     position: relative;
     margin: auto;
     padding: 0;
-    width: 80%;
-    max-width: 1000px;
+    width: 85%;
+    max-width: 1100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,18 +160,20 @@ a {
 
 .image-container {
     position: relative;
-    overflow: hidden; /* Hide excess parts when zoomed */
-    cursor: zoom-in; /* Initial cursor */
+    overflow: hidden;
+    cursor: zoom-in;
+    border-radius: 8px;
 }
 
 .modal-image {
     max-width: 100%;
     max-height: 80vh;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    object-fit: contain; /* Maintain aspect ratio */
-    transform: scale(1); /* Initial scale */
-    transform-origin: center center; /* Initial origin */
-    cursor: inherit; /* Inherit cursor from .image-container */
+    object-fit: contain;
+    transform: scale(1);
+    transform-origin: center center;
+    cursor: inherit;
+    border-radius: 8px;
 }
 
 .modal-image.loaded {
@@ -117,26 +181,28 @@ a {
 }
 
 .modal-image.zoomed {
-    cursor: grab; /* Change cursor when zoomed */
+    cursor: grab;
     transition: transform 0.3s ease, opacity 0.3s ease, cursor 0.3s ease;
 }
 
 .modal-image.zoomed.grabbing {
-    cursor: grabbing; /* Change cursor when actively dragging */
+    cursor: grabbing;
 }
 
 .close {
-    color: #fff;
+    color: var(--text-main);
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    padding: 8px;
 }
 
 .close:hover,
 .close:focus {
-    color: #bbb;
-    text-decoration: none;
+    color: var(--pink);
 }
 
 .prev, .next {
@@ -144,149 +210,225 @@ a {
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 16px;
+    padding: 20px;
     margin-top: -50px;
-    color: #fff;
+    color: var(--text-main);
     font-weight: bold;
-    font-size: 30px;
+    font-size: 32px;
     border: none;
-    background: none;
+    background: rgba(30, 30, 30, 0.8);
     user-select: none;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
 }
 
 .prev:hover, .next:hover {
-    color: #bbb;
+    color: var(--pink);
+    background: rgba(30, 30, 30, 0.95);
+    transform: scale(1.1);
 }
 
 .prev {
-    left: 0;
+    left: 20px;
 }
 
 .next {
-    right: 0;
+    right: 20px;
+}
+
+.modal-controls {
+    display: flex;
+    gap: 10px;
 }
 
 .modal-controls button {
-    background-color: #f00dd7;
-    color: #fff;
-    border: 2px solid #fff;
-    padding: 8px 16px;
-    margin: 0 5px;
-    border-radius: 5px;
+    background-color: var(--pink);
+    color: var(--text-main);
+    border: 2px solid var(--purple);
+    padding: 10px 20px;
+    margin: 0;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .modal-controls button:hover {
-    background-color: #fff;
-    color: #C323B8;
+    background-color: var(--purple);
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(155, 79, 150, 0.4);
 }
 
 .modal-caption {
     text-align: center;
     color: #ccc;
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 18px;
 }
 
-/* Additional Dark Theme Enhancements */
-button {
-    font-size: 16px;
-    outline: none;
-    border-radius: 4px;
-}
-
-#downloadBtn {
-    outline: none;
-    box-shadow: none;
-}
-
-/* Style for the Download Icon */
+/* Download icon styling */
 .download-icon {
-    width: 24px; /* Adjust size as needed */
-    height: 24px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
-    transition: transform 0.2s, filter 0.2s;
+    transition: all 0.3s ease;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 .download-icon:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
+    transform: scale(1.2);
+    filter: invert(14%) sepia(93%) saturate(7496%) hue-rotate(316deg) brightness(97%) contrast(93%);
 }
 
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-    }
-
-    .prev, .next {
-        font-size: 24px;
-        padding: 12px;
-    }
-
-    .modal-controls button {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
-
-    .modal-caption {
-        font-size: 16px;
-    }
-}
-
-/* Grabbing Cursor during active drag */
-.modal-image.grabbing {
-    cursor: grabbing;
-}
-
-/* Footer Styles */
+/* Footer styles */
 .footer {
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     bottom: 0;
     width: 100%;
-    background-color: #64094d;
-    text-align: right;
-    padding-right: 20px;
+    background-color: var(--bg-card);
+    border-top: 2px solid var(--accent);
+    padding: 0px 20px;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .footer-main {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
 }
 
 .visit-counter {
     text-align: center;
-    padding-inline: 10px;
-    padding-block: 5px;
-    border-radius: 60px;
-    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .github {
     display: flex;
     align-items: center;
-    justify-content: end;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.github:hover {
+    background-color: var(--surface-hov);
+    transform: translateY(-2px);
 }
 
 .github-label {
-    margin-right: 8px;
     font-size: 16px;
+    font-weight: 500;
 }
 
 .github-logo {
-    width: 20px; /* Adjust size as needed */
-    height: 20px;
+    width: 24px;
+    height: 24px;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
 }
 
-.github-logo:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
+.github:hover .github-logo {
+    filter: invert(14%) sepia(93%) saturate(7496%) hue-rotate(316deg) brightness(97%) contrast(93%);
+    transform: scale(1.1);
 }
 
+/* Links */
+a {
+    text-decoration: none;
+    color: var(--pink);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--purple);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+        padding-bottom: 90px;
+    }
+    
+    .color-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    
+    .gallery img {
+        height: 180px;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .prev, .next {
+        font-size: 28px;
+        padding: 15px;
+    }
+    
+    .modal-controls button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    .modal-caption {
+        font-size: 16px;
+    }
+    
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+    }
+    
+    .footer-main {
+        order: 2;
+    }
+    
+    .github {
+        order: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-header h1 {
+        font-size: 2rem;
+    }
+    
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-header {
+        top: 10px;
+        right: 15px;
+    }
+    
+    .close {
+        font-size: 32px;
+    }
+}

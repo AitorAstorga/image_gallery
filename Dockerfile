@@ -57,10 +57,14 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY generate_images_json.sh /usr/share/nginx/html/static/generate_images_json.sh
 RUN chmod +x /usr/share/nginx/html/static/generate_images_json.sh
 
+# Copy the configuration generator script into the final image.
+COPY generate_config.sh /usr/share/nginx/html/generate_config.sh
+RUN chmod +x /usr/share/nginx/html/generate_config.sh
+
 # Set the working directory.
 WORKDIR /usr/share/nginx/html/static
 
 EXPOSE 80
 
-# Start the image list generator in the background and launch Nginx.
-CMD sh -c "./generate_images_json.sh & nginx -g 'daemon off;'"
+# Generate configuration from environment variables, start image list generator, and launch Nginx.
+CMD sh -c "cd /usr/share/nginx/html && ./generate_config.sh && cd /usr/share/nginx/html/static && ./generate_images_json.sh & nginx -g 'daemon off;'"
