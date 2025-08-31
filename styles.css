@@ -76,11 +76,10 @@ body {
     color: #ccc;
 }
 
-/* Gallery container */
 .gallery-container {
     max-width: 1200px;
     margin: 0 auto;
-    margin-bottom: 40px;
+    padding-bottom: 80px;
 }
 
 .card {
