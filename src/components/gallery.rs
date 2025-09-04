@@ -1,5 +1,4 @@
 // src/components/gallery.rs
-
 use yew::prelude::*;
 use crate::models::GalleryProps;
 

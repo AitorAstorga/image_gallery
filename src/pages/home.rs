@@ -1,7 +1,5 @@
 // src/pages/home.rs
-
 use yew::prelude::*;
-
 use gloo_net::http::Request;
 use web_sys::{MouseEvent, window};
 use yew_hooks::use_event_with_window;

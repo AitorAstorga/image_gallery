@@ -1,5 +1,4 @@
 // src/models.rs
-
 use serde::{Deserialize, Serialize};
 use yew::prelude::{Properties, Callback};
 

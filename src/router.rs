@@ -1,5 +1,4 @@
 // src/router.rs
-
 use crate::pages::home::Home;
 use yew::prelude::*;
 use yew_router::prelude::*;

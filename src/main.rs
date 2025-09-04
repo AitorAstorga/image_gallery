@@ -1,3 +1,4 @@
+// src/main.rs
 mod components;
 mod config;
 mod models;

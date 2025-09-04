@@ -7,7 +7,7 @@ services:
     environment:
       - GALLERY_TITLE=Image Gallery
       - GALLERY_HEADING=Welcome!
-      - GALLERY_DESCRIPTION=This is the gallery description that you can customize with GALLERY_DESCRIPTION env variable and even supports <a href="https://git.prisma.moe/aichan/image_gallery">links like this</a>.
+      - GALLERY_DESCRIPTION=This is the gallery description that you can customize with GALLERY_DESCRIPTION env variable and even supports <a href="https://git.prisma.moe/aichan/image_gallery" target="_blank" rel="noopener noreferrer">links like this</a>.
       - VISIT_COUNTER_URL=https://visitcounter.aichan.ovh/counter/gallery_example/svg?label=Visits&background_label=00000000&background_counter=00000000&shadow_opacity=0&grad_stop1_color=00000000&grad_stop1_opacity=0&grad_stop1_opacity=0&grad_stop2_opacity=0  # Replace 'gallery_example' with your domain or unique identifier
     volumes:
       - <PATH_TO_YOUR_IMAGES>:/usr/share/nginx/html/static/images
